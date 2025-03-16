@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "year": 2011,
+    "publisher": "Harper",
+    "genre": "Sejarah",
+    "pages": 464,
+    "isbn": "9780062316097",
+    "status": "Dipinjam"
+  },
+  {
+    "id": 2,
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "year": 2018,
+    "publisher": "Penguin Random House",
+    "genre": "Pengembangan Diri",
+    "pages": 320,
+    "isbn": "9780735211292",
+    "status": "Dipinjam"
+  },
+  {
+    "id": 3,
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt & David Thomas",
+    "year": 1999,
+    "publisher": "Addison-Wesley",
+    "genre": "Teknologi",
+    "pages": 352,
+    "isbn": "9780201616224",
+    "status": "Tersedia"
+  },
+  {
+    "id": 4,
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert T. Kiyosaki",
+    "year": 1997,
+    "publisher": "Plata Publishing",
+    "genre": "Bisnis & Keuangan",
+    "pages": 336,
+    "isbn": "9781612680194",
+    "status": "Tersedia"
+  },
+  {
+    "id": 5,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "year": 1960,
+    "publisher": "J.B. Lippincott & Co.",
+    "genre": "Fiksi Klasik",
+    "pages": 281,
+    "isbn": "9780061120084",
+    "status": "Dipinjam"
+  }
+]
