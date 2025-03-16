@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsip Buku</title>
+</head>
+<body>
+    <h1>Arsip Buku</h1>
+
+    <!-- Form Tambah Buku -->
+    <h3>Tambah Buku</h3>
+    <form id="addBookForm">
+        <input type="text" id="title" placeholder="Judul Buku" required />
+        <input type="text" id="author" placeholder="Penulis" required />
+        <input type="number" id="year" placeholder="Tahun" required />
+        <button type="submit">Tambah</button>
+    </form>
+
+    <hr>
+
+    <!-- Daftar Buku -->
+    <h3>Daftar Buku</h3>
+    <ul id="bookList"></ul>
+
+    <script>
+        const API_URL = "http://localhost:3000/books";
+
+        // Fungsi: Ambil semua buku
+        async function fetchBooks() {
+            const res = await fetch(API_URL);
+            const books = (await res.json()).data;
+            const bookList = document.getElementById("bookList");
+            bookList.innerHTML = "";
+            books.forEach(book => {
+                const li = document.createElement("li");
+                li.textContent = `${book.title} - ${book.author} (${book.year})`;
+
+                // Tombol Update
+                const updateBtn = document.createElement("button");
+                updateBtn.textContent = "Update";
+                updateBtn.onclick = () => updateBook(book.id);
+
+                // Tombol Hapus
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "Hapus";
+                deleteBtn.onclick = () => deleteBook(book.id);
+
+                li.appendChild(updateBtn);
+                li.appendChild(deleteBtn);
+                bookList.appendChild(li);
+            });
+        }
+
+        // Fungsi: Tambah Buku
+        document.getElementById("addBookForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const title = document.getElementById("title").value;
+            const author = document.getElementById("author").value;
+            const year = parseInt(document.getElementById("year").value);
+
+            await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, author, year })
+            });
+            fetchBooks();
+        };
+
+        // Fungsi: Update Buku
+        async function updateBook(id) {
+            const newTitle = prompt("Masukkan judul baru:");
+            if (newTitle) {
+                await fetch(`${API_URL}/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ title: newTitle })
+                });
+                fetchBooks();
+            }
+        }
+
+        // Fungsi: Hapus Buku
+        async function deleteBook(id) {
+            if (confirm("Yakin ingin menghapus buku ini?")) {
+                await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+                fetchBooks();
+            }
+        }
+
+        // Tampilkan semua buku saat halaman dimuat
+        fetchBooks();
+    </script>
+</body>
+</html>
